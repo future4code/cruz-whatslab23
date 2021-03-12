@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Mensagem} from './components/Mensagem.js'
 
 const MainApp = styled.header`
 background-color: #282c34;
@@ -39,14 +40,10 @@ margin: 5px 10px;
 class App extends React.Component {
   render () {
     return (
-      <MainApp>
-        <LogoAppStyle>Bem vind@ ao WhatsLab!</LogoAppStyle>
-        <BodyChat>
-          <Paragraph>Victor: e ai?</Paragraph>
-          <Paragraph>Angelo: e ai?</Paragraph>
-        </BodyChat>
-      </MainApp>
+      <Mensagem></Mensagem>
     );
-  } 
+  }
+
+
 }
 export default App;

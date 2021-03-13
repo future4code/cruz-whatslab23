@@ -1,21 +1,27 @@
 import React from "react"
+import styled from "styled-components"
+
+const  Paragraph = styled.p`
+color: black;
+`
 
 export class Mensagem extends React.Component{
+    
     state = {
-        mensagem:[{
-            nome: "" ,
-            envioMsg: "" 
-        }], 
+        mensagem:[], 
         imputUsuario : "",
         imputMensagem : ""
     }
 
-    onChangeNome = (event) => {
+    alteraNome = (event) => {
         this.setState({imputUsuario:event.target.value})
     }
 
-    onChangeEnvioMensagem = (event) => {
+    alteraEnvioMensagem = (event) => {
         this.setState({imputMensagem:event.target.value})
+        if (event.key === "Enter") {
+            this.botaoEnviar();
+        }
     }
 
     botaoEnviar = () => {
@@ -24,22 +30,35 @@ export class Mensagem extends React.Component{
            envioMsg: this.state.imputMensagem
        }
 
-       const mensagemAcumulada = [novaMensagem, ...this.state.mensagem]
-       this.setState({mensagem:mensagemAcumulada})
-      
+       const mensagemAcumulada = [...this.state.mensagem, novaMensagem]
+       this.setState({ mensagem: mensagemAcumulada, imputMensagem: '' })
     }
-      
+    
+    apertaEnter = (event) => {
+        if (event.key === "Enter") {
+            this.botaoEnviar();
+        }
+    }
+
     render() {
+    
         const imprimir = this.state.mensagem.map((msg) =>{
-            return <p>{msg.nome} - {msg.envioMsg}</p>
+            return <Paragraph><strong>{msg.nome}</strong>: {msg.envioMsg}</Paragraph>
 
         })
     
     return (<div>
-        <input onChange={this.onChangeNome}/>
-      <input onChange={this.onChangeEnvioMensagem}/>
-      <button onClick={this.botaoEnviar}>CLick</button>
-        <div>{imprimir}</div>
-        </div>)
+                <div>{imprimir}</div>
+                <input 
+                onChange={this.alteraNome}
+                placeholder={'Digite seu nome'}/>
+                <input 
+                onChange={this.alteraEnvioMensagem}
+                onKeyDown={this.apertaEnter}
+                value={this.state.imputMensagem}
+                placeholder={'Digite sua mensagem'}
+                />
+                <button onClick={this.botaoEnviar}>Enviar</button>
+            </div>)
     }
 }

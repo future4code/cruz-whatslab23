@@ -32,16 +32,11 @@ padding: 10px;
 box-sizing: border-box;
 `
 
-const Paragraph = styled.p`
-color: #1a1a1a;
-margin: 5px 10px;
-`
-
 class App extends React.Component {
   render () {
     return (<div>
       <MainApp>
-        <LogoAppStyle> whatslab</LogoAppStyle>
+        <LogoAppStyle> Seja bem vind@ ao Whatslab</LogoAppStyle>
         <BodyChat>
           <Mensagem/>
         </BodyChat>

@@ -39,8 +39,17 @@ margin: 5px 10px;
 
 class App extends React.Component {
   render () {
-    return (
-      <Mensagem></Mensagem>
+    return (<div>
+      <MainApp>
+        <LogoAppStyle> whatslab</LogoAppStyle>
+        <BodyChat>
+          <Mensagem/>
+        </BodyChat>
+      </MainApp>
+      
+      
+      </div>
+      
     );
   }
 

@@ -1,8 +1,36 @@
 import React from "react"
 import styled from "styled-components"
 
-const  Paragraph = styled.p`
-color: black;
+const SendMessage = styled.div`
+display: flex;
+`
+const MessagBox = styled.div`
+max-width: 50%;
+background-color: #1a1a1a;
+margin: 5px 0;
+padding: 5px 10px;
+box-sizing: border-box;
+`
+
+const BodyChat = styled.div`
+background-color: whitesmoke;
+height: 80vh;
+width: 60%;
+display: flex;
+flex-direction: column-reverse;
+padding: 10px;
+box-sizing: border-box;
+overflow-y: auto;
+`
+const AreaInput = styled.div`
+display: flex;
+background-color:blue;
+`
+const InputName = styled.input`
+width: 100px;
+`
+const InputMessage = styled.input`
+flex: 1;
 `
 
 export class Mensagem extends React.Component{
@@ -30,7 +58,7 @@ export class Mensagem extends React.Component{
            envioMsg: this.state.imputMensagem
        }
 
-       const mensagemAcumulada = [...this.state.mensagem, novaMensagem]
+       const mensagemAcumulada = [novaMensagem, ...this.state.mensagem]
        this.setState({ mensagem: mensagemAcumulada, imputMensagem: '' })
     }
     
@@ -40,25 +68,39 @@ export class Mensagem extends React.Component{
         }
     }
 
+    deletarMensagem = (msgDel) => {
+        if (window.confirm('Tem certeza que deseja apagar a mensagem?')) {
+            const apagarMsg = [...this.state.mensagem]
+            const msgApagadaFiltro = apagarMsg.filter((msg) => {
+                return msg.envioMsg !== msgDel
+            })
+
+            this.setState({ mensagem: msgApagadaFiltro })
+        }
+    }
+
     render() {
     
         const imprimir = this.state.mensagem.map((msg) =>{
-            return <Paragraph><strong>{msg.nome}</strong>: {msg.envioMsg}</Paragraph>
+            return <SendMessage onDoubleClick={() => this.deletarMensagem(msg.envioMsg)}><MessagBox><div><strong>{msg.nome}</strong>: {msg.envioMsg}</div></MessagBox></SendMessage>
 
         })
     
-    return (<div>
-                <div>{imprimir}</div>
-                <input 
-                onChange={this.alteraNome}
-                placeholder={'Digite seu nome'}/>
-                <input 
-                onChange={this.alteraEnvioMensagem}
-                onKeyDown={this.apertaEnter}
-                value={this.state.imputMensagem}
-                placeholder={'Digite sua mensagem'}
-                />
-                <button onClick={this.botaoEnviar}>Enviar</button>
-            </div>)
+    return (<BodyChat>
+                
+                <AreaInput>
+                    <InputName 
+                    onChange={this.alteraNome}
+                    placeholder={'Digite seu nome'}/>
+                    <InputMessage 
+                    onChange={this.alteraEnvioMensagem}
+                    onKeyDown={this.apertaEnter}
+                    value={this.state.imputMensagem}
+                    placeholder={'Digite sua mensagem'}
+                    />
+                    <button onClick={this.botaoEnviar}>Enviar</button>
+                </AreaInput>
+                {imprimir}
+            </BodyChat>)
     }
 }

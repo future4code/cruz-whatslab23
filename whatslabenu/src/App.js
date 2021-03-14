@@ -1,10 +1,19 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 import {Mensagem} from './components/Mensagem.js'
+
+const GlobalStyle = createGlobalStyle`
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+`
 
 const MainApp = styled.header`
 background-color: #282c34;
 min-height: 100vh;
+width: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -15,31 +24,21 @@ position: relative;
 `
 const LogoAppStyle = styled.h1`
 position: absolute;
-top: -10px;
+top: 0px;
 left: 50%;
 transform: translateX(-50%);
 color: #fff;
 font-size: 2rem;
 `
 
-const BodyChat = styled.div`
-background-color: whitesmoke;
-height: 80vh;
-width: 60%;
-display: flex;
-flex-direction: column-reverse;
-padding: 10px;
-box-sizing: border-box;
-`
-
 class App extends React.Component {
-  render () {
+
+   render () {
     return (<div>
+      <GlobalStyle/>
       <MainApp>
         <LogoAppStyle> Seja bem vind@ ao Whatslab</LogoAppStyle>
-        <BodyChat>
-          <Mensagem/>
-        </BodyChat>
+        <Mensagem />
       </MainApp>
       
       

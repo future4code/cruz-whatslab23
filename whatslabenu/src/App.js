@@ -25,8 +25,8 @@ position: relative;
 const LogoAppStyle = styled.h1`
 position: absolute;
 top: 0px;
-left: 50%;
-transform: translateX(-50%);
+/* left: 50%;
+transform: translateX(-50%); */
 color: #fff;
 font-size: 2rem;
 `

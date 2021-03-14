@@ -2,8 +2,14 @@ import React from "react"
 import styled from "styled-components"
 
 const SendMessage = styled.div`
+display: flex;
+`
+const MessagBox = styled.div`
 max-width: 50%;
-background-color: blue;
+background-color: #1a1a1a;
+margin: 5px 0;
+padding: 5px 10px;
+box-sizing: border-box;
 `
 
 const BodyChat = styled.div`
@@ -76,7 +82,7 @@ export class Mensagem extends React.Component{
     render() {
     
         const imprimir = this.state.mensagem.map((msg) =>{
-            return <SendMessage onDoubleClick={() => this.deletarMensagem(msg.envioMsg)}><div><div>{msg.nome}: {msg.envioMsg}</div></div></SendMessage>
+            return <SendMessage onDoubleClick={() => this.deletarMensagem(msg.envioMsg)}><MessagBox><div><strong>{msg.nome}</strong>: {msg.envioMsg}</div></MessagBox></SendMessage>
 
         })
     

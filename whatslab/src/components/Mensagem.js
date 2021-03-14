@@ -10,7 +10,8 @@ export class Mensagem extends React.Component{
     state = {
         mensagem:[], 
         imputUsuario : "",
-        imputMensagem : ""
+        imputMensagem : "",
+        contador : "",
     }
 
     alteraNome = (event) => {
@@ -27,11 +28,17 @@ export class Mensagem extends React.Component{
     botaoEnviar = () => {
        const novaMensagem = {
            nome: this.state.imputUsuario,
-           envioMsg: this.state.imputMensagem
+           envioMsg: this.state.imputMensagem,
+       
        }
 
        const mensagemAcumulada = [...this.state.mensagem, novaMensagem]
        this.setState({ mensagem: mensagemAcumulada, imputMensagem: '' })
+
+        if(this.state.contador === 0){
+            this.setState(contador:contador + 1)
+        }else(
+            this.setState(contador:contador - 1))
     }
     
     apertaEnter = (event) => {
